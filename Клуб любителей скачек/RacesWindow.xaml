@@ -1,0 +1,46 @@
+﻿<Window x:Class="Клуб_любителей_скачек.RacesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Клуб_любителей_скачек"
+        mc:Ignorable="d"
+            Title="Скачки" Height="490" Width="800" MinHeight="490" MinWidth="800" MaxHeight="490" MaxWidth="800" WindowStartupLocation="CenterScreen" Background="#FF2E2E2E">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="299"/>
+            <RowDefinition Height="85"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="PanelView" Grid.Row="1" Height="384" VerticalAlignment="Top" Grid.RowSpan="2">
+            <DataGrid x:Name="DataGridRaces" Height="299" Width="634" Background="#FF6D6D6D" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ИД" Binding="{Binding id}" Width="27"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding date}" Width="70"/>
+                    <DataGridTextColumn Header="Локация" Binding="{Binding location}" Width="80"/>
+                    <DataGridTextColumn Header="Дистанция" Binding="{Binding distance}" Width="70"/>
+                    <DataGridTextColumn Header="Выигрыш" Binding="{Binding prize_money}"/>
+                    <DataGridTemplateColumn Width="84">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="ButtonDeleteGrid" Content="Удалить" Background="#FFE9CB80" Click="ButtonDeleteGrid_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="84">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="ButtonEditGrid" Content="Изменить" Background="#FFE9CB80" Click="ButtonEditGrid_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <Button x:Name="BtnToHorse" Content="Лошади" Width="120" Margin="5" FontSize="14" Background="#FFE9C180" Click="BtnToHorse_Click"/>
+                <Button x:Name="ButtonAdd" Content="Добавить" Width="120" Margin="5" FontSize="14" Background="#FFE9C180" Click="ButtonAdd_Click"/>
+                <Button x:Name="BtnToBetting" Content="Ставки" Width="120" Margin="5" FontSize="14" Background="#FFE9C180" Click="BtnToBetting_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,53 @@
+﻿<Window x:Class="Клуб_любителей_скачек.EditHorseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Клуб_любителей_скачек"
+        mc:Ignorable="d"
+                Title="Редактирование информации" Height="490" Width="800" MinHeight="490" MinWidth="800" MaxHeight="490" MaxWidth="800" WindowStartupLocation="CenterScreen" Background="#FF2E2E2E">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="299"/>
+            <RowDefinition Height="85"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="PanelEdit" Grid.Row="1" Grid.RowSpan="2">
+            <Grid x:Name="GridEdit" Height="301">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="17*"/>
+                    <RowDefinition Height="26*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="35*"/>
+                    <RowDefinition Height="36*"/>
+                    <RowDefinition Height="37*"/>
+                    <RowDefinition Height="39*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="46*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="117*"/>
+                    <ColumnDefinition Width="117*"/>
+                    <ColumnDefinition Width="119*"/>
+                    <ColumnDefinition Width="116*"/>
+                    <ColumnDefinition Width="117*"/>
+                    <ColumnDefinition Width="113*"/>
+                    <ColumnDefinition Width="52*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="3" Grid.Column="1" Foreground="White">Имя</Label>
+                <Label Grid.Row="5" Grid.Column="1" Foreground="White">Порода</Label>
+                <Label Grid.Row="7" Grid.Column="1" Foreground="White">Возраст</Label>
+                <Label Grid.Row="3" Grid.Column="5" Foreground="White">Имя хозяина</Label>
+                <Label Grid.Row="5" Grid.Column="5" Foreground="White">Фамилия хозяина</Label>
+                <TextBox x:Name="TextBoxEditName" Text="{Binding name}" Grid.Row="3" Grid.Column="2" PreviewTextInput="TextBoxEditName_PreviewTextInput" MaxLength="20"/>
+                <TextBox x:Name="TextBoxEditBreed" Text="{Binding breed}" Grid.Row="5" Grid.Column="2" PreviewTextInput="TextBoxEditName_PreviewTextInput" MaxLength="20"/>
+                <TextBox x:Name="TextBoxEditAge" Text="{Binding age}" Grid.Row="7" Grid.Column="2" PreviewTextInput="TextBoxEditAge_PreviewTextInput" MaxLength="20"></TextBox>
+                <Button x:Name="ButtonEditBack" Grid.Row="1" Grid.Column="1" Content="Вернуться назад" Background="#FFE9CB80" Click="ButtonEditBack_Click" ></Button>
+                <ComboBox x:Name="ComboBoxEditMembersFirstName" SelectedItem="{Binding members}" Grid.Row="3" Grid.Column="6" DisplayMemberPath="first_name"/>
+                <ComboBox x:Name="ComboBoxEditMembersLastName" SelectedItem="{Binding members}" Grid.Row="5" Grid.Column="6" DisplayMemberPath="last_name"/>
+            </Grid>
+            <Button x:Name="ButtonSaveEdit" Height="55" Width="300" Content="Внести изменения" FontSize="18" Background="#FFE9CB80" Click="ButtonEdit_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

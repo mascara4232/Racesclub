@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище RacesclubModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="betting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="horse_id" Type="int" Nullable="false" />
+          <Property Name="race_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="bet_date" Type="datetime" Nullable="false" />
+          <Property Name="member_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="horse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="breed" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="owner_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="join_date" Type="datetime" Nullable="false" />
+          <Property Name="membership_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="membership">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="benefits" Type="text" />
+        </EntityType>
+        <EntityType Name="races">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="distance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="prize_money" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="results">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="race_id" Type="int" Nullable="false" />
+          <Property Name="horse_id" Type="int" Nullable="false" />
+          <Property Name="horse_position" Type="int" />
+          <Property Name="time" Type="time" Precision="7" />
+        </EntityType>
+        <Association Name="FK__betting__horse_i__571DF1D5">
+          <End Role="horse" Type="Self.horse" Multiplicity="1" />
+          <End Role="betting" Type="Self.betting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horse">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="betting">
+              <PropertyRef Name="horse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__betting__member___5812160E">
+          <End Role="members" Type="Self.members" Multiplicity="1" />
+          <End Role="betting" Type="Self.betting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="betting">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__betting__race_id__59063A47">
+          <End Role="races" Type="Self.races" Multiplicity="1" />
+          <End Role="betting" Type="Self.betting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="races">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="betting">
+              <PropertyRef Name="race_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__horse__owner_id__4E88ABD4">
+          <End Role="members" Type="Self.members" Multiplicity="1" />
+          <End Role="horse" Type="Self.horse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="horse">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__members__members__4BAC3F29">
+          <End Role="membership" Type="Self.membership" Multiplicity="1" />
+          <End Role="members" Type="Self.members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="membership">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="members">
+              <PropertyRef Name="membership_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__results__horse_i__5441852A">
+          <End Role="horse" Type="Self.horse" Multiplicity="1" />
+          <End Role="results" Type="Self.results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horse">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="results">
+              <PropertyRef Name="horse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__results__race_id__534D60F1">
+          <End Role="races" Type="Self.races" Multiplicity="1" />
+          <End Role="results" Type="Self.results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="races">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="results">
+              <PropertyRef Name="race_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище RacesclubModelContainer">
+          <EntitySet Name="betting" EntityType="Self.betting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="horse" EntityType="Self.horse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="members" EntityType="Self.members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="membership" EntityType="Self.membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="races" EntityType="Self.races" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="results" EntityType="Self.results" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__betting__horse_i__571DF1D5" Association="Self.FK__betting__horse_i__571DF1D5">
+            <End Role="horse" EntitySet="horse" />
+            <End Role="betting" EntitySet="betting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__betting__member___5812160E" Association="Self.FK__betting__member___5812160E">
+            <End Role="members" EntitySet="members" />
+            <End Role="betting" EntitySet="betting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__betting__race_id__59063A47" Association="Self.FK__betting__race_id__59063A47">
+            <End Role="races" EntitySet="races" />
+            <End Role="betting" EntitySet="betting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__horse__owner_id__4E88ABD4" Association="Self.FK__horse__owner_id__4E88ABD4">
+            <End Role="members" EntitySet="members" />
+            <End Role="horse" EntitySet="horse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__members__members__4BAC3F29" Association="Self.FK__members__members__4BAC3F29">
+            <End Role="membership" EntitySet="membership" />
+            <End Role="members" EntitySet="members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__results__horse_i__5441852A" Association="Self.FK__results__horse_i__5441852A">
+            <End Role="horse" EntitySet="horse" />
+            <End Role="results" EntitySet="results" />
+          </AssociationSet>
+          <AssociationSet Name="FK__results__race_id__534D60F1" Association="Self.FK__results__race_id__534D60F1">
+            <End Role="races" EntitySet="races" />
+            <End Role="results" EntitySet="results" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RacesclubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="betting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="horse_id" Type="Int32" Nullable="false" />
+          <Property Name="race_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="bet_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="member_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="horse" Relationship="Self.FK__betting__horse_i__571DF1D5" FromRole="betting" ToRole="horse" />
+          <NavigationProperty Name="members" Relationship="Self.FK__betting__member___5812160E" FromRole="betting" ToRole="members" />
+          <NavigationProperty Name="races" Relationship="Self.FK__betting__race_id__59063A47" FromRole="betting" ToRole="races" />
+        </EntityType>
+        <EntityType Name="horse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="breed" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="owner_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="betting" Relationship="Self.FK__betting__horse_i__571DF1D5" FromRole="horse" ToRole="betting" />
+          <NavigationProperty Name="members" Relationship="Self.FK__horse__owner_id__4E88ABD4" FromRole="horse" ToRole="members" />
+          <NavigationProperty Name="results" Relationship="Self.FK__results__horse_i__5441852A" FromRole="horse" ToRole="results" />
+        </EntityType>
+        <EntityType Name="members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="join_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="membership_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="betting" Relationship="Self.FK__betting__member___5812160E" FromRole="members" ToRole="betting" />
+          <NavigationProperty Name="horse" Relationship="Self.FK__horse__owner_id__4E88ABD4" FromRole="members" ToRole="horse" />
+          <NavigationProperty Name="membership" Relationship="Self.FK__members__members__4BAC3F29" FromRole="members" ToRole="membership" />
+        </EntityType>
+        <EntityType Name="membership">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="benefits" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="members" Relationship="Self.FK__members__members__4BAC3F29" FromRole="membership" ToRole="members" />
+        </EntityType>
+        <EntityType Name="races">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="distance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="prize_money" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
+          <NavigationProperty Name="betting" Relationship="Self.FK__betting__race_id__59063A47" FromRole="races" ToRole="betting" />
+          <NavigationProperty Name="results" Relationship="Self.FK__results__race_id__534D60F1" FromRole="races" ToRole="results" />
+        </EntityType>
+        <EntityType Name="results">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="race_id" Type="Int32" Nullable="false" />
+          <Property Name="horse_id" Type="Int32" Nullable="false" />
+          <Property Name="horse_position" Type="Int32" />
+          <Property Name="time" Type="Time" Precision="7" />
+          <NavigationProperty Name="horse" Relationship="Self.FK__results__horse_i__5441852A" FromRole="results" ToRole="horse" />
+          <NavigationProperty Name="races" Relationship="Self.FK__results__race_id__534D60F1" FromRole="results" ToRole="races" />
+        </EntityType>
+        <Association Name="FK__betting__horse_i__571DF1D5">
+          <End Role="horse" Type="Self.horse" Multiplicity="1" />
+          <End Role="betting" Type="Self.betting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horse">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="betting">
+              <PropertyRef Name="horse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__betting__member___5812160E">
+          <End Role="members" Type="Self.members" Multiplicity="1" />
+          <End Role="betting" Type="Self.betting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="betting">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__betting__race_id__59063A47">
+          <End Role="races" Type="Self.races" Multiplicity="1" />
+          <End Role="betting" Type="Self.betting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="races">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="betting">
+              <PropertyRef Name="race_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__horse__owner_id__4E88ABD4">
+          <End Role="members" Type="Self.members" Multiplicity="1" />
+          <End Role="horse" Type="Self.horse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="members">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="horse">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__results__horse_i__5441852A">
+          <End Role="horse" Type="Self.horse" Multiplicity="1" />
+          <End Role="results" Type="Self.results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horse">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="results">
+              <PropertyRef Name="horse_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__members__members__4BAC3F29">
+          <End Role="membership" Type="Self.membership" Multiplicity="1" />
+          <End Role="members" Type="Self.members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="membership">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="members">
+              <PropertyRef Name="membership_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__results__race_id__534D60F1">
+          <End Role="races" Type="Self.races" Multiplicity="1" />
+          <End Role="results" Type="Self.results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="races">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="results">
+              <PropertyRef Name="race_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RacesclubEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="betting" EntityType="Self.betting" />
+          <EntitySet Name="horse" EntityType="Self.horse" />
+          <EntitySet Name="members" EntityType="Self.members" />
+          <EntitySet Name="membership" EntityType="Self.membership" />
+          <EntitySet Name="races" EntityType="Self.races" />
+          <EntitySet Name="results" EntityType="Self.results" />
+          <AssociationSet Name="FK__betting__horse_i__571DF1D5" Association="Self.FK__betting__horse_i__571DF1D5">
+            <End Role="horse" EntitySet="horse" />
+            <End Role="betting" EntitySet="betting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__betting__member___5812160E" Association="Self.FK__betting__member___5812160E">
+            <End Role="members" EntitySet="members" />
+            <End Role="betting" EntitySet="betting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__betting__race_id__59063A47" Association="Self.FK__betting__race_id__59063A47">
+            <End Role="races" EntitySet="races" />
+            <End Role="betting" EntitySet="betting" />
+          </AssociationSet>
+          <AssociationSet Name="FK__horse__owner_id__4E88ABD4" Association="Self.FK__horse__owner_id__4E88ABD4">
+            <End Role="members" EntitySet="members" />
+            <End Role="horse" EntitySet="horse" />
+          </AssociationSet>
+          <AssociationSet Name="FK__results__horse_i__5441852A" Association="Self.FK__results__horse_i__5441852A">
+            <End Role="horse" EntitySet="horse" />
+            <End Role="results" EntitySet="results" />
+          </AssociationSet>
+          <AssociationSet Name="FK__members__members__4BAC3F29" Association="Self.FK__members__members__4BAC3F29">
+            <End Role="membership" EntitySet="membership" />
+            <End Role="members" EntitySet="members" />
+          </AssociationSet>
+          <AssociationSet Name="FK__results__race_id__534D60F1" Association="Self.FK__results__race_id__534D60F1">
+            <End Role="races" EntitySet="races" />
+            <End Role="results" EntitySet="results" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище RacesclubModelContainer" CdmEntityContainer="RacesclubEntities">
+          <EntitySetMapping Name="betting">
+            <EntityTypeMapping TypeName="RacesclubModel.betting">
+              <MappingFragment StoreEntitySet="betting">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="horse_id" ColumnName="horse_id" />
+                <ScalarProperty Name="race_id" ColumnName="race_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="bet_date" ColumnName="bet_date" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horse">
+            <EntityTypeMapping TypeName="RacesclubModel.horse">
+              <MappingFragment StoreEntitySet="horse">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="breed" ColumnName="breed" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="RacesclubModel.members">
+              <MappingFragment StoreEntitySet="members">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="join_date" ColumnName="join_date" />
+                <ScalarProperty Name="membership_id" ColumnName="membership_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="membership">
+            <EntityTypeMapping TypeName="RacesclubModel.membership">
+              <MappingFragment StoreEntitySet="membership">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="benefits" ColumnName="benefits" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="races">
+            <EntityTypeMapping TypeName="RacesclubModel.races">
+              <MappingFragment StoreEntitySet="races">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="prize_money" ColumnName="prize_money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="results">
+            <EntityTypeMapping TypeName="RacesclubModel.results">
+              <MappingFragment StoreEntitySet="results">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="race_id" ColumnName="race_id" />
+                <ScalarProperty Name="horse_id" ColumnName="horse_id" />
+                <ScalarProperty Name="horse_position" ColumnName="horse_position" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

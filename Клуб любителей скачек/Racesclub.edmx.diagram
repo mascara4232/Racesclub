@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="55695402c96048a19d51f370dc80aadd" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="RacesclubModel.betting" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RacesclubModel.horse" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RacesclubModel.members" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RacesclubModel.membership" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RacesclubModel.races" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RacesclubModel.results" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <AssociationConnector Association="RacesclubModel.FK__betting__horse_i__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="RacesclubModel.FK__betting__member___5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="RacesclubModel.FK__betting__race_id__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="RacesclubModel.FK__horse__owner_id__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="RacesclubModel.FK__results__horse_i__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="RacesclubModel.FK__members__members__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="RacesclubModel.FK__results__race_id__534D60F1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
